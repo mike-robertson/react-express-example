@@ -53,7 +53,7 @@ export default class CommentBox extends Component {
       <div className='comment-box'>
         <h1>Comments!!!</h1>
         <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+        <CommentForm onCommentSubmit={(comment) => this.handleCommentSubmit(comment)} />
       </div>
     )
   }

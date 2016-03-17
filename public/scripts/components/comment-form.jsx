@@ -4,7 +4,8 @@ import React, { Component, PropTypes } from 'react'
 
 export default class CommentForm extends Component {
   handleSubmit (e) {
-    e.preventDefault()
+    e.preventDefault();
+    console.log(this);
     const author = this.refs.author.value.trim()
     const text = this.refs.text.value.trim()
 
@@ -21,7 +22,7 @@ export default class CommentForm extends Component {
 
   render () {
     return (
-      <form className='comment-form' onSubmit={this.handleSubmit}>
+      <form className='comment-form' onSubmit={(e) => this.handleSubmit(e)}>
         <input type='text' placeholder='Your name' ref='author' />
         <input type='text' placeholder='Say something...' ref='text' />
         <input type='submit' value='Post' />
