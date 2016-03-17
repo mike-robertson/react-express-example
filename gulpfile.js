@@ -12,6 +12,8 @@ var buffer = require('vinyl-buffer'); // Vinyl stream support
 var watchify = require('watchify'); // Watchify for source changes
 var merge = require('utils-merge'); // Object merge tool
 var duration = require('gulp-duration'); // Time aspects of your gulp process
+var Server = require('karma').Server; // used by karma to run unit tests
+var opn = require('opn');
 
 // Configuration for Gulp
 var config = {
@@ -22,6 +24,16 @@ var config = {
     outputFile: 'build.js',
   },
 };
+
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 // Error reporting function
 function mapError(err) {
@@ -69,11 +81,14 @@ gulp.task('build', function() {
     .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
 
   bundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
+  opn('http://localhost:3000');
 
   bundler.on('update', function() {
     bundle(bundler); // Re-run bundle on source updates
   });
 });
+
+
 
 // Gulp task for build
 gulp.task('default', ['build'], function() {
