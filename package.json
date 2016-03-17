@@ -1,0 +1,58 @@
+{
+  "name": "react-tutorial",
+  "version": "0.0.0",
+  "description": "Code from the React tutorial.",
+  "main": "server.js",
+  "dependencies": {
+    "babel-polyfill": "^6.7.2",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "body-parser": "^1.4.3",
+    "browserify": "^13.0.0",
+    "chalk": "^1.1.1",
+    "express": "^4.4.5",
+    "gulp": "^3.9.1",
+    "gulp-duration": "0.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "systemjs": "^0.19.24",
+    "utils-merge": "^1.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0",
+    "whatwg-fetch": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "nodemon": "^1.9.1",
+    "parallelshell": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "parallelshell 'nodemon server.js' 'gulp build'",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactjs/react-tutorial.git"
+  },
+  "keywords": [
+    "react",
+    "tutorial",
+    "comment",
+    "example"
+  ],
+  "author": "petehunt",
+  "bugs": {
+    "url": "https://github.com/reactjs/react-tutorial/issues"
+  },
+  "homepage": "https://github.com/reactjs/react-tutorial",
+  "engines": {
+    "node": "0.12.x"
+  }
+}
