@@ -27,6 +27,10 @@ var config = {
     outputDir: './public/build/',
     outputFile: 'build.js',
   },
+  standalone: {
+    outputDir: './public/build/standalone/'
+  },
+  moduleName: 'SeedComments' // name of the module we are exporting
 };
 
 /**
@@ -80,8 +84,7 @@ function buildBundle(bundler) {
   var bundleTimer = duration('Javascript bundle time');
 
   bundler
-    .bundle({standalone: 'comment'}, // the module name
-      function(err, src, map){})
+    .bundle(function(err, src, map){})
     .on('error', mapError) // Map error reporting
     .pipe(source('main.jsx')) // Set source name
     .pipe(buffer()) // Convert to gulp pipeline
@@ -95,7 +98,26 @@ function buildBundle(bundler) {
     .pipe(bundleTimer); // Output time timing of the file creation
 
 }
+function standaloneBundle(bundler) {
+  var bundleTimer = duration('Javascript bundle time');
 
+  bundler
+    .bundle({standalone: config.moduleName}, // the module name
+      function(err, src, map){})
+    .on('error', mapError) // Map error reporting
+    .pipe(source('main.jsx')) // Set source name
+    .pipe(buffer()) // Convert to gulp pipeline
+    .pipe(rename(config.js.outputFile)) // Rename the output file
+    .pipe(sourcemaps.init({loadMaps: true})) // Extract the inline sourcemaps
+    .pipe(sourcemaps.write('./map')) // Set folder for sourcemaps to output to
+    .pipe(gulp.dest(config.standalone.outputDir)) // Set the output folder
+    .pipe(notify({
+      message: 'Generated file: <%= file.relative %>',
+    })) // Output the file being created
+    .pipe(bundleTimer); // Output time timing of the file creation
+
+}
+//
 gulp.task('livereload', function() {
   livereload.listen(); // Start livereload server
   var args = merge(watchify.args, { debug: true, extensions:".jsx"}); // Merge in default watchify args with browserify arguments
@@ -120,7 +142,13 @@ gulp.task('build', ['test'], function() {
     .transform(babelify, {presets: ['es2015', 'react']}) // Babel transform
     .transform(globalShim); // Removes React and ReactDOM from dependencies since they are assumed
 
-  buildBundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
+  var standaloneBundler = browserify(config.js.src, args) // Browserify
+    .plugin('minifyify', {map: false})
+    .transform(babelify, {presets: ['es2015', 'react']}) // Babel transform
+    .transform(globalShim); // Removes React and ReactDOM from dependencies since they are assumed
+
+  buildBundle(bundler);
+  standaloneBundle(standaloneBundler);
 });
 //
 
