@@ -14,6 +14,10 @@ var merge = require('utils-merge'); // Object merge tool
 var duration = require('gulp-duration'); // Time aspects of your gulp process
 var Server = require('karma').Server; // used by karma to run unit tests
 var opn = require('opn');
+var globalShim = require('browserify-global-shim').configure({
+  "react": "React",
+  "react-dom": "ReactDOM"
+});
 
 // Configuration for Gulp
 var config = {
@@ -76,7 +80,8 @@ function buildBundle(bundler) {
   var bundleTimer = duration('Javascript bundle time');
 
   bundler
-    .bundle(function(err, src, map){})
+    .bundle({standalone: 'comment'}, // the module name
+      function(err, src, map){})
     .on('error', mapError) // Map error reporting
     .pipe(source('main.jsx')) // Set source name
     .pipe(buffer()) // Convert to gulp pipeline
@@ -112,7 +117,8 @@ gulp.task('build', ['test'], function() {
 
   var bundler = browserify(config.js.src, args) // Browserify
     .plugin('minifyify', {map: false})
-    .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
+    .transform(babelify, {presets: ['es2015', 'react']}) // Babel transform
+    .transform(globalShim); // Removes React and ReactDOM from dependencies since they are assumed
 
   buildBundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
 });

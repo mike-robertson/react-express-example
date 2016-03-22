@@ -37,6 +37,12 @@ In order to enable live reload, you need to click the symbol. If there is a blac
 #### gulp build / npm run build
 This builds the code into the /public/build directory and depends on the test task. This build will minify the build.js file as well.
 
+NOTE: This build process will not bundle react and react-dom into the build.js file, as any consuming apps should already have react and react-dom as dependencies somewhere. If you want to test build.js for whatever reason, you will need to import them into index.html
+just use:
+```
+  <script src="https://fb.me/react-0.14.7.js"></script>
+  <script src="https://fb.me/react-dom-0.14.7.js"></script>
+```
 
 
 #### npm run start-dev

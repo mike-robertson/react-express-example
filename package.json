@@ -26,6 +26,7 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
+    "browserify-global-shim": "^1.0.3",
     "cheerio": "^0.20.0",
     "gulp": "^3.9.1",
     "jasmine": "^2.4.1",
@@ -44,8 +45,7 @@
     "test": "gulp test",
     "start-dev": "parallelshell 'nodemon server.js' 'gulp livereload'",
     "start": "node server.js",
-    "build": "gulp build",
-    "test": "gulp test"   
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
