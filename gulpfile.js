@@ -57,7 +57,7 @@ function bundle(bundler) {
   var bundleTimer = duration('Javascript bundle time');
 
   bundler
-    .bundle()
+    .bundle(function(err, src, map){})
     .on('error', mapError) // Map error reporting
     .pipe(source('main.jsx')) // Set source name
     .pipe(buffer()) // Convert to gulp pipeline
@@ -72,7 +72,26 @@ function bundle(bundler) {
     .pipe(livereload({ start: true })); // Reload the view in the browser
 }
 
-gulp.task('build', function() {
+function buildBundle(bundler) {
+  var bundleTimer = duration('Javascript bundle time');
+
+  bundler
+    .bundle(function(err, src, map){})
+    .on('error', mapError) // Map error reporting
+    .pipe(source('main.jsx')) // Set source name
+    .pipe(buffer()) // Convert to gulp pipeline
+    .pipe(rename(config.js.outputFile)) // Rename the output file
+    .pipe(sourcemaps.init({loadMaps: true})) // Extract the inline sourcemaps
+    .pipe(sourcemaps.write('./map')) // Set folder for sourcemaps to output to
+    .pipe(gulp.dest(config.js.outputDir)) // Set the output folder
+    .pipe(notify({
+      message: 'Generated file: <%= file.relative %>',
+    })) // Output the file being created
+    .pipe(bundleTimer); // Output time timing of the file creation
+
+}
+
+gulp.task('livereload', function() {
   livereload.listen(); // Start livereload server
   var args = merge(watchify.args, { debug: true, extensions:".jsx"}); // Merge in default watchify args with browserify arguments
 
@@ -88,9 +107,18 @@ gulp.task('build', function() {
   });
 });
 
+gulp.task('build', ['test'], function() {
+  var args = {extensions:".jsx"}; // Merge in default watchify args with browserify arguments
 
+  var bundler = browserify(config.js.src, args) // Browserify
+    .plugin('minifyify', {map: false})
+    .transform(babelify, {presets: ['es2015', 'react']}); // Babel tranforms
+
+  buildBundle(bundler); // Run the bundle the first time (required for Watchify to kick in)
+});
+//
 
 // Gulp task for build
-gulp.task('default', ['build'], function() {
+gulp.task('default', ['livereload'], function() {
 
 });

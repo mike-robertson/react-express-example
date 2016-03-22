@@ -12,7 +12,6 @@ describe('Comment test', function() {
 		};
 
 		var comment = React.createElement(Comment, props);
-    console.log('inside')
 
     expect(comment.props.author).toEqual('author');
   })

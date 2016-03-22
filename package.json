@@ -34,15 +34,18 @@
     "karma-browserify": "^5.0.2",
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.8",
+    "minifyify": "^7.3.2",
     "nodemon": "^1.9.1",
     "opn": "^4.0.1",
     "parallelshell": "^2.0.0",
     "react-tools": "^0.13.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "parallelshell 'nodemon server.js' 'gulp build'",
-    "start": "node server.js"
+    "test": "gulp test",
+    "start-dev": "parallelshell 'nodemon server.js' 'gulp livereload'",
+    "start": "node server.js",
+    "build": "gulp build",
+    "test": "gulp test"   
   },
   "repository": {
     "type": "git",

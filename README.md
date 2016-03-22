@@ -34,8 +34,8 @@ In order to enable live reload, you need to click the symbol. If there is a blac
 
 ## Commands
 
-#### gulp build
-This builds the code into the /public/build directory
+#### gulp build / npm run build
+This builds the code into the /public/build directory and depends on the test task. This build will minify the build.js file as well.
 
 
 
@@ -49,7 +49,7 @@ This simply runs the node server
 
 
 
-#### gulp test
+#### gulp test / npm run test
 This runs the unit tests
 
 
