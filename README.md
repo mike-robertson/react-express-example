@@ -39,10 +39,9 @@ This builds the code into the /lib/ directory and depends on the test task. This
 
 NOTE: This build process will not bundle react and react-dom into the build.js file, as any consuming apps should already have react and react-dom as dependencies somewhere. If you want to test build.js for whatever reason, you will need to import them into index.html
 just use:
-```HTML
-<script src="https://fb.me/react-0.14.7.js"></script>
-<script src="https://fb.me/react-dom-0.14.7.js"></script>
-```
+
+    <script src="https://fb.me/react-0.14.7.js"></script>
+    <script src="https://fb.me/react-dom-0.14.7.js"></script>
 
 
 #### npm run dev (or start-dev)
