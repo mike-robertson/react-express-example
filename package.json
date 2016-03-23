@@ -1,6 +1,7 @@
 {
   "name": "react-gulp-es6-seed",
-  "version": "0.0.0",
+  "main": "lib/components/comment-box.js",
+  "version": "0.0.6",
   "description": "Basic react component",
   "dependencies": {
     "babel-polyfill": "^6.7.2",
@@ -25,6 +26,7 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.6.5",
     "browserify-global-shim": "^1.0.3",
     "cheerio": "^0.20.0",
     "gulp": "^3.9.1",
@@ -44,8 +46,10 @@
     "test": "gulp test",
     "start-dev": "parallelshell 'nodemon server.js' 'gulp livereload'",
     "start": "node server.js",
-    "build": "gulp build",
-    "prepublish": "npm run build"
+    "build": "parallelshell 'gulp build' 'npm run compile'",
+    "prepublish": "npm run build",
+    "dev": "npm run start-dev",
+    "compile": "babel ./public/scripts --out-dir ./lib --source-maps --presets es2015,react --plugins babel-plugin-add-module-exports"
   },
   "keywords": [
     "react",

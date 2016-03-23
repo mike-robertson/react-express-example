@@ -28,7 +28,10 @@ var config = {
     outputFile: 'build.js',
   },
   standalone: {
-    outputDir: './public/build/standalone/'
+    outputDir: './lib/standalone/'
+  },
+  build: {
+    outputDir: './lib'
   },
   moduleName: 'SeedComments' // name of the module we are exporting
 };
@@ -91,7 +94,7 @@ function buildBundle(bundler) {
     .pipe(rename(config.js.outputFile)) // Rename the output file
     .pipe(sourcemaps.init({loadMaps: true})) // Extract the inline sourcemaps
     .pipe(sourcemaps.write('./map')) // Set folder for sourcemaps to output to
-    .pipe(gulp.dest(config.js.outputDir)) // Set the output folder
+    .pipe(gulp.dest(config.build.outputDir)) // Set the output folder
     .pipe(notify({
       message: 'Generated file: <%= file.relative %>',
     })) // Output the file being created
