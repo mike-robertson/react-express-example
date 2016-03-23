@@ -39,9 +39,8 @@ This builds the code into the /lib/ directory and depends on the test task. This
 
 NOTE: This build process will not bundle react and react-dom into the build.js file, as any consuming apps should already have react and react-dom as dependencies somewhere. If you want to test build.js for whatever reason, you will need to import them into index.html
 just use:
-```
+```html
   <script src="https://fb.me/react-0.14.7.js"></script>
-
   <script src="https://fb.me/react-dom-0.14.7.js"></script>
 ```
 
@@ -77,7 +76,7 @@ This will be updated with more stuff such as gulp tasks to bundle/publish to npm
 
 In order to publish, run the npm publish command. This will put up the relevate files (those not in .npmignore). It will also run several scripts before publishing. Once published, you can consume the package by doing npm install --save in your project, and you can import the component by using es6 syntax
 
-```
+```javascript
 import MyComponent from 'my-module-name';
 ```
 
