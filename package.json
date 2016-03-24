@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "browserify-global-shim": "^1.0.3",
     "chai": "^3.5.0",
     "cheerio": "^0.20.0",
@@ -39,6 +40,7 @@
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.8",
     "karma-mocha": "^0.2.2",
+    "karma-react-jsx-preprocessor": "^0.1.1",
     "minifyify": "^7.3.2",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
@@ -64,5 +66,8 @@
   "author": "mikerobertson",
   "engines": {
     "node": "0.12.x"
+  },
+  "babel": {
+    "presets": ["es2015", "react"]
   }
 }
