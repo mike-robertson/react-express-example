@@ -30,19 +30,22 @@
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "browserify-global-shim": "^1.0.3",
+    "chai": "^3.5.0",
     "cheerio": "^0.20.0",
     "gulp": "^3.9.1",
-    "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-browserify": "^5.0.2",
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.8",
+    "karma-mocha": "^0.2.2",
     "minifyify": "^7.3.2",
+    "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
     "opn": "^4.0.1",
     "parallelshell": "^2.0.0",
-    "react-tools": "^0.13.3"
+    "react-tools": "^0.13.3",
+    "sinon": "^1.17.3"
   },
   "scripts": {
     "test": "gulp test",

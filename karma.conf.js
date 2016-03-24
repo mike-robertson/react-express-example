@@ -2,7 +2,7 @@
 module.exports = function(config) {
   config.set({
     browsers: ['Chrome'],
-    frameworks: ['jasmine', 'browserify'],
+    frameworks: ['mocha', 'browserify'],
     files: [
       // 'public/build/build.js',
       'public/scripts/**/*.spec.js'

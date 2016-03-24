@@ -1,4 +1,4 @@
-import jasmine from 'jasmine';
+import {expect} from 'chai';
 import cheerio from 'cheerio';
 import Comment from './comment';
 import React from 'react';
@@ -13,6 +13,13 @@ describe('Comment test', function() {
 
 		var comment = React.createElement(Comment, props);
 
-    expect(comment.props.author).toEqual('author');
+		var html = ReactDOMServer.renderToStaticMarkup(comment);
+
+		let $ = cheerio.load(html);
+		var commentHtml = $('.comment').html();
+
+    console.log(commentHtml)
+
+    expect(comment.props.author).to.equal('author');
   })
 })
